@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Group</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="page">
+  <div class="navbar">
+    <span>Logged in as: <strong><%= username %></strong></span>
+    <a href="/logout" class="btn btn-secondary" style="padding: 8px 20px; margin: 0;">Logout</a>
+  </div>
+
+  <div class="page-container">
+    <h1 style="margin-bottom: 25px;">Create New Group</h1>
+
+    <form action="/groups/create" method="POST">
+      <div class="form-group">
+        <label>Group Name</label>
+        <input type="text" name="group_name" placeholder="e.g. Study Group, Friends..." required>
+      </div>
+      <div class="form-group">
+        <label>Add Members</label>
+        <select name="selected_users" multiple size="6">
+          <% users.forEach(user => { %>
+            <option value="<%= user.user_id %>"><%= user.username %></option>
+          <% }) %>
+        </select>
+        <p class="hint">Hold Cmd (Mac) or Ctrl (Windows) to select multiple</p>
+      </div>
+      <button type="submit" class="btn">Create Group</button>
+    </form>
+
+    <br>
+    <a href="/groups">← Back to Chats</a>
+  </div>
+</body>
+</html>

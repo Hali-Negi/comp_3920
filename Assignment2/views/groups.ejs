@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Chats</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="page">
+  <div class="navbar">
+    <span>Logged in as: <strong><%= username %></strong></span>
+    <a href="/logout" class="btn btn-secondary" style="padding: 8px 20px; margin: 0;">Logout</a>
+  </div>
+
+  <div class="page-container">
+    <h1 style="margin-bottom: 5px;">Your Chats</h1>
+    <p style="color: rgba(255,255,255,0.6); margin-bottom: 25px;">
+      Total groups: <%= groups.length %>
+    </p>
+
+    <% if (groups.length === 0) { %>
+      <p style="color: rgba(255,255,255,0.5);">You have no groups yet. Create one!</p>
+    <% } else { %>
+      <% groups.forEach(group => { %>
+        <a href="/groups/<%= group.room_id %>" class="group-card">
+          <div class="group-name">
+            <%= group.name %>
+            <% if (group.unread_count > 0) { %>
+              <span class="unread-badge"><%= group.unread_count %> unread</span>
+            <% } %>
+          </div>
+          <div class="group-meta">
+            Last message: <%= group.last_message_date ? new Date(group.last_message_date).toLocaleDateString() : 'No messages yet' %>
+          </div>
+        </a>
+      <% }) %>
+    <% } %>
+
+    <br>
+    <a href="/groups/create" class="btn">+ New Group</a>
+  </div>
+</body>
+</html>

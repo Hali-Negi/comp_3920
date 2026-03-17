@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invite People</title>
+  <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body class="page">
+  <div class="navbar">
+    <span>Logged in as: <strong><%= username %></strong></span>
+    <a href="/logout" class="btn btn-secondary" style="padding: 8px 20px; margin: 0;">Logout</a>
+  </div>
+
+  <div class="page-container">
+    <h1 style="margin-bottom: 25px;">Invite People to <%= room.name %></h1>
+
+    <h3 style="margin-bottom: 10px; color: rgba(255,255,255,0.7);">Current Members</h3>
+    <ul class="member-list">
+      <% members.forEach(m => { %>
+        <li>👤 <%= m.username %></li>
+      <% }) %>
+    </ul>
+
+    <h3 style="margin-bottom: 10px; color: rgba(255,255,255,0.7);">Add Members</h3>
+    <% if (nonMembers.length === 0) { %>
+      <p style="color: rgba(255,255,255,0.5);">No more users to invite.</p>
+    <% } else { %>
+      <form action="/groups/<%= room_id %>/invite" method="POST" style="display:flex; gap:10px;">
+        <select name="invite_user_id" style="flex:1; padding:10px; border-radius:10px; background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2);">
+          <% nonMembers.forEach(u => { %>
+            <option value="<%= u.user_id %>"><%= u.username %></option>
+          <% }) %>
+        </select>
+        <button type="submit" class="btn" style="margin:0;">Invite</button>
+      </form>
+    <% } %>
+
+    <br>
+    <a href="/groups/<%= room_id %>">← Back to Chat</a>
+  </div>
+</body>
+</html>
