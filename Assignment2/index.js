@@ -394,6 +394,8 @@ app.get("/groups/:room_id", isAuthenticated, async (req, res) => {
   `, { room_id });
 
   // Clear unread messages by updating last_read_message_id to the latest message
+  // Save last read before clearing
+  const lastReadMessageId = membership[0].last_read_message_id;
   if (messages.length > 0) {
     const lastMessageId = messages[messages.length - 1].message_id;
     await dbPool.execute(`
@@ -424,7 +426,8 @@ app.get("/groups/:room_id", isAuthenticated, async (req, res) => {
     messages,
     reactions,
     emojis,
-    user_id
+    user_id,
+    lastReadMessageId
   });
 });
 
