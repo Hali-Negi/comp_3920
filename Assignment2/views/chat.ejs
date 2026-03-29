@@ -24,27 +24,6 @@
       <p style="color: rgba(255,255,255,0.5);">No messages yet. Say hello!</p>
     <% } %>
 
-    <!-- <% messages.forEach(msg => { %>
-      <div class="message-card">
-        <span class="message-username"><%= msg.username %></span>
-        <span class="message-time"><%= new Date(msg.sent_datetime).toLocaleString() %></span>
-        <p class="message-text"><%= msg.text %></p>
-        <div>
-          <% reactions.filter(r => r.message_id === msg.message_id).forEach(r => { %>
-            <span class="reaction-badge"><%= r.symbol %> <%= r.count %></span>
-          <% }) %>
-          <form action="/groups/<%= room.room_id %>/react" method="POST" style="display:inline">
-            <input type="hidden" name="message_id" value="<%= msg.message_id %>">
-            <select name="emoji_id" style="background:rgba(255,255,255,0.1); color:white; border:1px solid rgba(255,255,255,0.2); border-radius:8px; padding:4px 8px;">
-              <% emojis.forEach(e => { %>
-                <option value="<%= e.emoji_id %>"><%= e.symbol %> <%= e.name %></option>
-              <% }) %>
-            </select>
-            <button type="submit" class="btn" style="padding: 5px 12px; margin: 0;">React</button>
-          </form>
-        </div>
-      </div>
-    <% }) %> -->
 
     <% let dividerShown = false; %>
 <% messages.forEach(msg => { %>
